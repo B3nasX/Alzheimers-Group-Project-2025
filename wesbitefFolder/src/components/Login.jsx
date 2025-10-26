@@ -9,7 +9,7 @@ const Login = ({ onLogin }) => {
   const users = {
     'doc001': { id: 'doc001', password: 'password123', name: 'Dr. Smith', role: 'doctor' },
     'doc002': { id: 'doc002', password: 'password123', name: 'Dr. Johnson', role: 'doctor' },
-    'admin001': { id: 'admin001', password: 'admin123', name: 'Admin', role: 'admin' }
+    'admin': { id: 'admin', password: 'admin', name: 'Admin', role: 'admin' }
   };
 
   const handleIdChange = (e) => {
@@ -62,7 +62,7 @@ const Login = ({ onLogin }) => {
         <div className="demo-accounts">
           <h4>Demo Accounts:</h4>
           <p>Doctor: doc001 / password123</p>
-          <p>Admin: admin001 / admin123</p>
+          <p>Admin: admin / admin</p>
         </div>
       </div>
     </div>

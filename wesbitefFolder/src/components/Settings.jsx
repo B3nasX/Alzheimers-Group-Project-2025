@@ -3,13 +3,12 @@ import Navbar from './NavBar';
 import './Settings.css';
 
 const Settings = ({ user, onLogout }) => {
-  const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
+  const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [fontSize, setFontSize] = useState('medium');
   const [language, setLanguage] = useState('english');
   
-  // Edit Profile State
   const [profileData, setProfileData] = useState({
     name: user?.name || '',
     email: 'user@example.com',
@@ -25,11 +24,9 @@ const Settings = ({ user, onLogout }) => {
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     const savedFontSize = localStorage.getItem('fontSize') || 'medium';
-    const savedLanguage = localStorage.getItem('language') || 'english';
     
     setDarkMode(savedDarkMode);
     setFontSize(savedFontSize);
-    setLanguage(savedLanguage);
     
     applyDarkMode(savedDarkMode);
     applyFontSize(savedFontSize);
@@ -63,19 +60,15 @@ const Settings = ({ user, onLogout }) => {
     applyFontSize(size);
   };
 
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('language', lang);
-  };
 
-  const handlePreferencesClick = () => {
-    setIsPreferencesOpen(!isPreferencesOpen);
+  const handleCustomizeClick = () => {
+    setIsCustomizeOpen(!isCustomizeOpen);
     setIsEditProfileOpen(false);
   };
 
   const handleEditProfileClick = () => {
     setIsEditProfileOpen(!isEditProfileOpen);
-    setIsPreferencesOpen(false);
+    setIsCustomizeOpen(false);
   };
 
   const handleProfileChange = (e) => {
@@ -127,22 +120,7 @@ const Settings = ({ user, onLogout }) => {
       <circle cx="12" cy="7" r="4"></circle>
     </svg>
   );
-
-  const SecurityIcon = () => (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-    </svg>
-  );
-
-  const NotificationIcon = () => (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-      <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-    </svg>
-  );
-
-  const PreferencesIcon = () => (
+  const CustomizeIcon = () => (
     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="12" cy="12" r="3"></circle>
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -156,7 +134,7 @@ const Settings = ({ user, onLogout }) => {
       <div className="content">
         <header>
           <h1>Settings</h1>
-          <p>Manage your account preferences</p>
+          <p>Manage your account</p>
         </header>
 
         <div className="settings-grid">
@@ -198,48 +176,26 @@ const Settings = ({ user, onLogout }) => {
               </div>
             )}
           </div>
-
-          
-          <div className="setting-card">
-            <div className="card-icon">
-              <SecurityIcon />
-            </div>
-            <div className="card-content">
-              <h3>Security</h3>
-              <p>Change password and manage security settings</p>
-              <button className="btn-primary">Security Settings</button>
-            </div>
-          </div>
-
-          <div className="setting-card">
-            <div className="card-icon">
-              <NotificationIcon />
-            </div>
-            <div className="card-content">
-              <h3>Notifications</h3>
-              <p>Manage email and push notifications</p>
-              <button className="btn-primary">Notification Settings</button>
-            </div>
           </div>
           <div className="setting-card">
             <div className="card-icon">
-              <PreferencesIcon />
+              <CustomizeIcon />
             </div>
             <div className="card-content">
-              <h3>Preferences</h3>
+              <h3>Customize</h3>
               <p>Customize your dashboard and display settings</p>
               <button 
                 className="btn-primary" 
-                onClick={handlePreferencesClick}
+                onClick={handleCustomizeClick}
               >
-                Preferences
+                Customize
               </button>
             </div>
 
-            {isPreferencesOpen && (
-              <div className="preferences-menu">
-                <div className="preference-item">
-                  <label className="preference-label">
+            {isCustomizeOpen && (
+              <div className="customize-menu">
+                <div className="customize-item">
+                  <label className="customize-label">
                     <span>Dark Mode</span>
                     <div className="toggle-switch">
                       <input
@@ -253,8 +209,8 @@ const Settings = ({ user, onLogout }) => {
                   </label>
                 </div>
 
-                <div className="preference-item">
-                  <label className="preference-label">Font Size</label>
+                <div className="customize-item">
+                  <label className="customize-label">Font Size</label>
                   <div className="font-size-options">
                     <button
                       className={`font-size-btn ${fontSize === 'small' ? 'active' : ''}`}
@@ -277,24 +233,14 @@ const Settings = ({ user, onLogout }) => {
                   </div>
                 </div>
 
-                <div className="preference-item">
-                  <label className="preference-label">Language</label>
-                  <select
-                    value={language}
-                    onChange={(e) => handleLanguageChange(e.target.value)}
-                    className="language-select"
-                  >
-                    <option value="english">English</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                    <option value="german">German</option>
-                  </select>
+                <div className="customize-item">
+                  <label className="customize-label">Language</label>
                 </div>
 
-                <div className="preference-actions">
+                <div className="customize-actions">
                   <button 
                     className="btn-secondary"
-                    onClick={() => setIsPreferencesOpen(false)}
+                    onClick={() => setIsCustomizeOpen(false)}
                   >
                     Close
                   </button>
@@ -304,7 +250,6 @@ const Settings = ({ user, onLogout }) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
