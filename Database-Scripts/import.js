@@ -1,4 +1,3 @@
-// import.js
 const fs = require("fs");
 const csv = require("csv-parser");
 const admin = require("firebase-admin");
@@ -10,12 +9,11 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-// Change this to your desired collection name
-const collectionName = "patient_health_data"; // e.g., "products", "customers", etc.
+const collectionName = "patient_health_data"; 
 
 const results = [];
 
-fs.createReadStream("dementia_patients_health_data.csv") // Replace with your CSV file name
+fs.createReadStream("dementia_patients_health_data.csv") 
   .pipe(csv())
   .on("data", (data) => results.push(data))
   .on("end", async () => {
@@ -23,7 +21,6 @@ fs.createReadStream("dementia_patients_health_data.csv") // Replace with your CS
 
     const batch = db.batch();
     results.forEach((row) => {
-      // Create a new document with auto ID (or use your own, e.g. row.id)
       const docRef = db.collection(collectionName).doc();
       batch.set(docRef, row);
     });
