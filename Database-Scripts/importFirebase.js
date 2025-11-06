@@ -17,7 +17,7 @@ fs.createReadStream("dementia_patients_health_data.csv")
   .pipe(csv())
   .on("data", (data) => results.push(data))
   .on("end", async () => {
-    console.log(`Uploading ${results.length} records to Firestore...`);
+    console.log("Uploading ${results.length} records to Firestore...");
 
     const batch = db.batch();
     results.forEach((row) => {
