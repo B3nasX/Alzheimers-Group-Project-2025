@@ -16,7 +16,6 @@ def uniqueValCount(input_file, output_file):
     for column in df.columns:
         # Get unique values and their counts
         # If values are numbers give a range of values in increments of 10 unless the numbers are 1 or 0, those are bools output as true or false
-        # Values should be grouped logically
 
         if pd.api.types.is_numeric_dtype(df[column]):
             if set(df[column].dropna().unique()).issubset({0, 1}):
