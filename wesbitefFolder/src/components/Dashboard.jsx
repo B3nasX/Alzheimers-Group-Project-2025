@@ -29,11 +29,11 @@ const Dashboard = ({ user, onLogout }) => {
 
           {user.role === 'admin' && (
             <>
-              <div className="dashboard-card">
+              <Link to="/manage-users" className="dashboard-card">
                 <div className="card-icon">⚙️</div>
                 <h3>User Management</h3>
                 <p>Manage staff accounts</p>
-              </div>
+              </Link>
               
             
             </>

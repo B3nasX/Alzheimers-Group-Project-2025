@@ -9,6 +9,7 @@ import './App.css';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import ManageUsers from './components/manageUser';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHhEB-AF_qCj-4a4cNqfWremIJOSm9UAk",
@@ -72,6 +73,8 @@ function App() {
             } 
           />
           <Route path="/" element={<Navigate to="/login" />} />
+
+          <Route path="manage-users" element={<ManageUsers user={user} onLogout={handleLogout}/>}  />
         </Routes>
       </div>
     </Router>
