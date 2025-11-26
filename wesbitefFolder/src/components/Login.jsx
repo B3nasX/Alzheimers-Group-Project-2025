@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState } from "react";
+import { collection,doc, getDoc} from "firebase/firestore";
+import { db ,auth } from "../firebase/config"; 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import "./Login.css";
 
 const Login = ({ onLogin }) => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
-  // Mock user data 
-  const users = {
-    'doc001': { id: 'doc001', password: 'password123', name: 'Dr. Smith', role: 'doctor' },
-    'doc002': { id: 'doc002', password: 'password123', name: 'Dr. Johnson', role: 'doctor' },
-    'admin': { id: 'admin', password: 'admin', name: 'Admin', role: 'admin' }
+
+  const admin = {
+    id: "admin",
+    password: "admin123",
+    name: "Admin",
+    role: "admin",
+    email: "admin@hospital.com"
   };
 
   const handleIdChange = (e) => {
@@ -20,30 +25,89 @@ const Login = ({ onLogin }) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const user = users[id];
-    if (user && user.password === password) {
-      onLogin(user);
-    } else {
-      alert('Invalid credentials. Please try again.');
-    }
-  };
 
+    try {
+      if (id === admin.id && password === admin.password) {
+        onLogin(admin);
+        return;
+      }
+     let EmailToUse = id;
+     let profileData = null;
+     if (!id.includes("@")) {
+      const gpRef = doc(db, "gp", id);
+      const gpSnap = await getDoc(gpRef);
+
+      if (!gpSnap.exists) {
+        alert("User not found for this ID.");
+        return;
+      }
+      profileData = gpSnap.data();
+      EmailToUse = profileData.email;
+      if (!EmailToUse) {
+        alert("Email not found for this ID.");
+        return;
+      }
+     }
+
+     const userCredential = await signInWithEmailAndPassword(
+        auth,
+        EmailToUse,
+        password
+      );
+      const user = userCredential.user;
+      const uid = user.uid;
+
+      if (!profileData) {
+        const gpRef = doc(db, "gp", uid);
+        const gpSnap = await getDoc(gpRef);
+        if (!gpSnap.exists) {
+          alert("Gp profile not found.");
+          return;
+        }
+        profileData = gpSnap.data();
+      }
+      const firstName = profileData.firstName || "";
+      const lastName = profileData.lastName || "";
+      const role = profileData.role || "";
+      onLogin({
+        uid,
+        gpId : uid,
+        firstName,
+        lastName,
+        role: profileData.role,
+        email: user.email
+      });
+    } catch (error) {
+      console.error("Login error:", error);
+      if (error.code === "auth/user-not-found") {
+        alert("User not found.");
+      } else if (error.code === "auth/wrong-password") {
+        alert("Incorrect password.");
+        } else if (error.code === "auth/invalid-email") {
+        alert("Invalid email format.");
+        } else if (error.code === "auth/invalid-credentials") {
+        alert("Invalid credentials provided.");
+      } else {
+        alert("Login failed. Please try again.");
+      }
+    }
+    };
   return (
     <div className="login-container">
       <div className="login-form">
         <h2>Medical Portal Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>User ID:</label>
+            <label>User ID or Email:</label>
             <input
               type="text"
               name="id"
               value={id}
               onChange={handleIdChange}
-              required
+              placeholder="Enter your UID or Email"
+              required         
             />
           </div>
           <div className="form-group">
@@ -53,17 +117,12 @@ const Login = ({ onLogin }) => {
               name="password"
               value={password}
               onChange={handlePasswordChange}
+              placeholder="Enter your password"
               required
             />
           </div>
           <button type="submit" className="login-btn">Login</button>
         </form>
-        
-        <div className="demo-accounts">
-          <h4>Demo Accounts:</h4>
-          <p>Doctor: doc001 / password123</p>
-          <p>Admin: admin / admin</p>
-        </div>
       </div>
     </div>
   );

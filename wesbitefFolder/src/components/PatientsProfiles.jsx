@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import Navbar from './NavBar';
 import './PatientsProfiles.css';
+import { db } from '../firebase/config';
+import { collection, doc, getDocs, getDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 const PatientProfiles = ({ user, onLogout }) => {
-  // Mock patient data with quiz status
-  const patients = [
-    { id: 1, name: 'Emily ', age: 45, condition: 'Dementia', lastVisit: '2024-01-15', doneQuiz: true },
-    { id: 2, name: 'Beans', age: 32, condition: 'Alzheimer\'s', lastVisit: '2024-01-14', doneQuiz: false },
-    { id: 3, name: 'Awbrie', age: 58, condition: 'Dementia', lastVisit: '2024-01-13', doneQuiz: true },
-    { id: 4, name: 'Sean', age: 29, condition: 'Alzheimer\'s', lastVisit: '2024-01-12', doneQuiz: false }
-  ];
+  const [patients, setPatients] = useState([]);
+  const navigate = useNavigate();
+
+  const loadPatients = async () => {
+  try {
+    const patientsCol = collection(db, "patient");
+    const patientSnapshot = await getDocs(patientsCol);
+    const patientList = patientSnapshot.docs.map((doc) => ({
+      firebaseId : doc.id,
+      ...doc.data(),
+    }));
+    setPatients(patientList);
+  } catch (error) {
+    console.error("Error loading patients: ", error);
+  }
+};
+  useEffect(() => {
+    loadPatients();
+  }, []);
 
   return (
     <div className="patient-profiles">
@@ -23,23 +38,17 @@ const PatientProfiles = ({ user, onLogout }) => {
 
         <div className="patients-grid">
           {patients.map(patient => (
-            <div key={patient.id} className="patient-card">
+            <div key={patient.firebaseId} className="patient-card">
               <div className="patient-header">
-                <h3>{patient.name}</h3>
+                <h3>{patient.firstName} {patient.lastName}</h3>
               </div>
-              
-              <div className="patient-info">
-                <p><strong>Age:</strong> {patient.age}</p>
-                <p><strong>Condition:</strong> {patient.condition}</p>
-                <p><strong>Last Visit:</strong> {patient.lastVisit}</p>
-              </div>
-              
               <div className="patient-actions">
-                <button className="btn-primary">View Profile</button>
+            <button className="btn-primary" onClick={() => navigate(`/patient/${patient.firebaseId}`)}>View Profile</button>
                 <button className="btn-secondary">Test Results</button>
               </div>
             </div>
           ))}
+          {patients.length === 0 && (<p>No patients found.</p>)}
         </div>
       </div>
     </div>
