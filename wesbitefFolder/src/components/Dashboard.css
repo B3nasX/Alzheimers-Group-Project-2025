@@ -33,7 +33,7 @@
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-decoration: none;
   color: inherit;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -43,13 +43,7 @@
 
 .dashboard-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.card-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #007bff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .dashboard-card h3 {
@@ -62,53 +56,33 @@
   line-height: 1.5;
 }
 
-.recent-activity {
+/* News section */
+
+.recent-news {
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
 }
 
-.recent-activity h2 {
+.recent-news h2 {
   color: #2c3e50;
   margin-bottom: 1rem;
 }
 
-.activity-list {
+.news-list {
   margin-top: 1rem;
 }
 
-.activity-item {
+.news-item {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0;
   border-bottom: 1px solid #eee;
 }
 
-.activity-item:last-child {
+.news-item:last-child {
   border-bottom: none;
 }
-
-.activity-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #f8f9fa;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #007bff;
-}
-
-.activity-content p {
-  margin: 0;
-  color: #333;
-}
-
-.activity-time {
-  color: #666;
-  font-size: 0.9rem;
-}
-

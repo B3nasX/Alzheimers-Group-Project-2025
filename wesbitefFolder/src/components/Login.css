@@ -6,37 +6,20 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-
-body.dark-mode .login-container {
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-}
-
 .login-form {
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
   transition: all 0.3s ease;
-}
-
-
-body.dark-mode .login-form {
-  background: #2d3748;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  border: 1px solid #4a5568;
 }
 
 .login-form h2 {
   text-align: center;
   margin-bottom: 1.5rem;
   color: #333;
-  transition: color 0.3s ease;
-}
-
-body.dark-mode .login-form h2 {
-  color: #ffffff;
 }
 
 .form-group {
@@ -48,11 +31,6 @@ body.dark-mode .login-form h2 {
   margin-bottom: 0.5rem;
   font-weight: bold;
   color: #333;
-  transition: color 0.3s ease;
-}
-
-body.dark-mode .form-group label {
-  color: #e2e8f0;
 }
 
 .form-group input {
@@ -66,20 +44,10 @@ body.dark-mode .form-group label {
   transition: all 0.3s ease;
 }
 
-body.dark-mode .form-group input {
-  background: #4a5568;
-  border-color: #718096;
-  color: #ffffff;
-}
-
-body.dark-mode .form-group input::placeholder {
-  color: #a0aec0;
-}
-
-body.dark-mode .form-group input:focus {
+.form-group input:focus {
   outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .login-btn {
@@ -99,58 +67,12 @@ body.dark-mode .form-group input:focus {
   background-color: #0056b3;
 }
 
-body.dark-mode .login-btn {
-  background-color: #4299e1;
-}
-
-body.dark-mode .login-btn:hover {
-  background-color: #3182ce;
-}
-
-.demo-accounts {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-body.dark-mode .demo-accounts {
-  background-color: #4a5568;
-  border: 1px solid #718096;
-}
-
-.demo-accounts h4 {
-  margin-bottom: 0.5rem;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-body.dark-mode .demo-accounts h4 {
-  color: #e2e8f0;
-}
-
-.demo-accounts p {
-  margin-bottom: 0.25rem;
-  color: #666;
-  transition: color 0.3s ease;
-}
-
-
-
-
-.form-group input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
 @media (max-width: 480px) {
   .login-form {
     margin: 1rem;
     padding: 1.5rem;
   }
-  
+
   .login-container {
     padding: 1rem;
   }

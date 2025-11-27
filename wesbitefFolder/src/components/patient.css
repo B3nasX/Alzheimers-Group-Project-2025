@@ -1,0 +1,24 @@
+.patient-profile {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.patient-name {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.patient-info {
+    margin-bottom: 15px;
+    
+}
+#patient-details {
+
+    margin-bottom : 20px;
+
+}

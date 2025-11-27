@@ -10,21 +10,9 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import ManageUsers from './components/manageUser';
+import PatientProfile from './components/patient';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCHhEB-AF_qCj-4a4cNqfWremIJOSm9UAk",
-  authDomain: "group-group-project.firebaseapp.com",
-  projectId: "group-group-project",
-  storageBucket: "group-group-project.firebasestorage.app",
-  messagingSenderId: "482465876201",
-  appId: "1:482465876201:web:920683a1ad556bb7c74878",
-  measurementId: "G-ZF3LK3LE9K"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
+import { app, db } from './firebase/config';
 
 
 function App() {
@@ -75,6 +63,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
 
           <Route path="manage-users" element={<ManageUsers user={user} onLogout={handleLogout}/>}  />
+          <Route path="patient/:id" element={<PatientProfile user={user} onLogout={handleLogout}/>}  />
         </Routes>
       </div>
     </Router>
@@ -82,4 +71,3 @@ function App() {
 }
 
 export default App;
-export { db, app };
