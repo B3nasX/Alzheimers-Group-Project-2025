@@ -34,11 +34,10 @@ const PatientProfile = ({ user, onLogout }) => {
     <>
       <Navbar user={user} onLogout={onLogout} />
       <div className="patient-profile">
-
       
         <header>
           <h1 className="patient-name">
-            {patient.firstName} {patient.lastName}
+            {patient.first_name} {patient.last_name}
           </h1>
           <h3 id="patient-details">Patient Details</h3>
         </header>
@@ -48,7 +47,6 @@ const PatientProfile = ({ user, onLogout }) => {
           <p><strong>Patient ID:</strong> {patient.patient_ID}</p>
           <p><strong>UID:</strong> {patient.UID}</p>
         </div>
-
         
           <button className="back-button" onClick={() => window.history.back()}>
             Back

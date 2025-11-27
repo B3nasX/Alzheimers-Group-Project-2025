@@ -11,7 +11,7 @@ const Login = ({ onLogin }) => {
 
   const admin = {
     id: "admin",
-    password: "admin123",
+    password: "admin",
     name: "Admin",
     role: "admin",
     email: "admin@hospital.com"

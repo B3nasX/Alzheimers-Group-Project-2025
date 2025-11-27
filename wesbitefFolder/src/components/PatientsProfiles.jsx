@@ -40,7 +40,7 @@ const PatientProfiles = ({ user, onLogout }) => {
           {patients.map(patient => (
             <div key={patient.firebaseId} className="patient-card">
               <div className="patient-header">
-                <h3>{patient.firstName} {patient.lastName}</h3>
+                <h3>{patient.first_name} {patient.last_name}</h3>
               </div>
               <div className="patient-actions">
             <button className="btn-primary" onClick={() => navigate(`/patient/${patient.firebaseId}`)}>View Profile</button>
