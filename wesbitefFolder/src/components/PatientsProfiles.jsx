@@ -43,7 +43,7 @@ const PatientProfiles = ({ user, onLogout }) => {
                 <h3>{patient.first_name} {patient.last_name}</h3>
               </div>
               <div className="patient-actions">
-            <button onClick={() => navigate(`/patient/${patient.firebaseId}`)}>View Profile</button>
+            <button className= "click-button" onClick={() => navigate(`/patient/${patient.firebaseId}`)}>View Profile</button>
               </div>
             </div>
           ))}

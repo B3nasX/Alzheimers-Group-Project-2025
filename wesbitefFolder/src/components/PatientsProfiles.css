@@ -12,7 +12,15 @@
   color: #2c3e50;
   margin-bottom: 0.5rem;
 }
-
+.click-button {
+  background-color: #3498db;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 .patient-profiles header p {
   color: #666;
 }
@@ -62,19 +70,6 @@
 
 .patient-info strong {
   color: #333;
-}
-
-.status-text {
-  font-weight: bold;
-  margin-left: 0.5rem;
-}
-
-.status-text.completed {
-  color: #28a745;
-}
-
-.status-text.pending {
-  color: #ffc107;
 }
 
 .patient-actions {
