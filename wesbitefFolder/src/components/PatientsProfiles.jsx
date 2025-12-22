@@ -4,7 +4,7 @@ import './PatientsProfiles.css';
 import { db } from '../firebase/config';
 import { collection, doc, getDocs, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-
+import ChatbotWidget from './ChatbotWidget';
 const PatientProfiles = ({ user, onLogout }) => {
   const [patients, setPatients] = useState([]);
   const navigate = useNavigate();
@@ -51,6 +51,7 @@ const PatientProfiles = ({ user, onLogout }) => {
           {patients.length === 0 && (<p>No patients found.</p>)}
         </div>
       </div>
+      <ChatbotWidget />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import './patient.css';
 import { db } from '../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
+import ChatbotWidget from './ChatbotWidget';
 
 const PatientProfile = ({ user, onLogout }) => {
   const { id } = useParams();
@@ -29,7 +30,6 @@ const PatientProfile = ({ user, onLogout }) => {
   if (!patient) {
     return <p>Loading patient data...</p>;
   }
-
   return (
     <>
       <Navbar user={user} onLogout={onLogout} />
@@ -52,6 +52,7 @@ const PatientProfile = ({ user, onLogout }) => {
             Back
           </button>
       </div>
+      <ChatbotWidget />
     </>
   );
 };
