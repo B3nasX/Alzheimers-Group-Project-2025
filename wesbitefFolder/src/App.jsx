@@ -10,9 +10,10 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import ManageUsers from './components/manageUser';
 import PatientProfile from './components/patient';
+import Navbar from './components/NavBar';
+import Footer from './components/footer';
 
 import { app, db } from './firebase/config';
-
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,37 +29,52 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Routes>
-          <Route 
-            path="/login" 
-            element={
-              user ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />
-            } 
-          />
-          <Route 
-            path="/dashboard" 
-            element={
-              user ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
-            } 
-          />
-          <Route 
-            path="/patients" 
-            element={
-              user ? <PatientProfiles user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
-            } 
-          />
-          
-          <Route 
-            path="/settings" 
-            element={
-              user ? <Settings user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
-            } 
-          />
-          <Route path="/" element={<Navigate to="/login" />} />
-
-          <Route path="manage-users" element={<ManageUsers user={user} onLogout={handleLogout}/>}  />
-          <Route path="patient/:id" element={<PatientProfile user={user} onLogout={handleLogout}/>}  />
-        </Routes>
+        
+        
+        <main className="main-content">
+          <Routes>
+            <Route 
+              path="/login" 
+              element={
+                user ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />
+              } 
+            />
+            <Route 
+              path="/dashboard" 
+              element={
+                user ? <Dashboard user={user} /> : <Navigate to="/login" />
+              } 
+            />
+            <Route 
+              path="/patients" 
+              element={
+                user ? <PatientProfiles user={user} /> : <Navigate to="/login" />
+              } 
+            />
+            <Route 
+              path="/settings" 
+              element={
+                user ? <Settings user={user} /> : <Navigate to="/login" />
+              } 
+            />
+            <Route 
+              path="/manage-users" 
+              element={
+                user ? <ManageUsers user={user} /> : <Navigate to="/login" />
+              } 
+            />
+            <Route 
+              path="/patient/:id" 
+              element={
+                user ? <PatientProfile user={user} /> : <Navigate to="/login" />
+              } 
+            />
+            <Route path="/" element={<Navigate to="/login" />} />
+          </Routes>
+        </main>
+        
+        {/* Show Footer only when user is logged in */}
+        {user && <Footer />}
       </div>
     </Router>
   );
