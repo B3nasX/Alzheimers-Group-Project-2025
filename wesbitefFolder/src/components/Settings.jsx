@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './NavBar';
-import './Settings.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./NavBar";
+import "./Settings.css";
 
 const Settings = ({ user, onLogout }) => {
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
@@ -22,7 +22,7 @@ const Settings = ({ user, onLogout }) => {
 
   const handlePrimaryCardClick = () => {
     if (isAdmin) {
-      navigate('/manage-users');
+      navigate("/manage-users");
     } else {
       handleEditProfileClick();
     }
@@ -47,7 +47,7 @@ const Settings = ({ user, onLogout }) => {
                 : "Update your personal information"}
             </p>
 
-            <button className="btn-primary" onClick={handlePrimaryCardClick}>
+            <button className="open-button" onClick={handlePrimaryCardClick}>
               {isAdmin ? "Open User Management" : "Edit Profile"}
             </button>
 
@@ -56,7 +56,7 @@ const Settings = ({ user, onLogout }) => {
                 <div className="edit-box-header">
                   <h2>Edit Profile</h2>
                   <button
-                    className="close-btn"
+                    className="close-button"
                     onClick={() => setIsEditProfileOpen(false)}
                   >
                     Close
@@ -76,13 +76,13 @@ const Settings = ({ user, onLogout }) => {
             <h3>Customize</h3>
             <p>Adjust your dashboard preferences</p>
 
-            <button className="btn-primary" onClick={handleCustomizeClick}>
+            <button className="customize-button" onClick={handleCustomizeClick}>
               Customize
             </button>
 
             {isCustomizeOpen && (
                 <button
-                  className="btn-secondary"
+                  className="close-button"
                   onClick={() => setIsCustomizeOpen(false)}
                 >
                   Close

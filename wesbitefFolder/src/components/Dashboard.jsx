@@ -48,10 +48,6 @@ const Dashboard = ({ user, onLogout }) => {
             <p>View and manage patient information</p>
           </Link>
 
-          <Link to="/test-results" className="dashboard-card">
-            <h3>Quiz Results</h3>
-            <p>View patients Quiz results</p>
-          </Link>
 
           {user.role === "admin" && (
             <Link to="/manage-users" className="dashboard-card">

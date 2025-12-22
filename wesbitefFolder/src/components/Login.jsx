@@ -3,6 +3,7 @@ import { collection,doc, getDoc} from "firebase/firestore";
 import { db ,auth } from "../firebase/config"; 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
+import logo from "../assets/beaslogo.png";
 
 const Login = ({ onLogin }) => {
   const [id, setId] = useState("");
@@ -68,8 +69,8 @@ const Login = ({ onLogin }) => {
         }
         profileData = gpSnap.data();
       }
-      const firstName = profileData.firstName || "";
-      const lastName = profileData.lastName || "";
+      const firstName = profileData.first_name || "";
+      const lastName = profileData.last_name || "";
       const role = profileData.role || "";
       onLogin({
         uid,
@@ -97,7 +98,8 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Medical Portal Login</h2>
+        <h2>Bea's Clinic</h2>
+        <img src={logo} alt="Bea's Clinic Logo" className="login-logo" />
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>User ID or Email:</label>

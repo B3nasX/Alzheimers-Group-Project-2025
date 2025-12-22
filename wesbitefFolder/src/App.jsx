@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import PatientProfiles from './components/PatientsProfiles';
-import TestResults from './components/TestResults';
 import Settings from './components/Settings';
 import './App.css';
 import { initializeApp } from "firebase/app";
@@ -48,12 +47,7 @@ function App() {
               user ? <PatientProfiles user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
             } 
           />
-          <Route 
-            path="/test-results" 
-            element={
-              user ? <TestResults user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
-            } 
-          />
+          
           <Route 
             path="/settings" 
             element={

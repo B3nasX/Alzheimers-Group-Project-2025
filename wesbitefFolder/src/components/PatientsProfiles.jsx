@@ -1,10 +1,10 @@
-import React, { useEffect,useState } from 'react';
-import Navbar from './NavBar';
-import './PatientsProfiles.css';
-import { db } from '../firebase/config';
-import { collection, doc, getDocs, getDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
-import ChatbotWidget from './ChatbotWidget';
+import React, { useEffect,useState } from "react";
+import Navbar from "./NavBar";
+import "./PatientsProfiles.css";
+import { db } from "../firebase/config";
+import { collection, doc, getDocs, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import ChatbotWidget from "./ChatbotWidget";
 const PatientProfiles = ({ user, onLogout }) => {
   const [patients, setPatients] = useState([]);
   const navigate = useNavigate();
@@ -43,8 +43,7 @@ const PatientProfiles = ({ user, onLogout }) => {
                 <h3>{patient.first_name} {patient.last_name}</h3>
               </div>
               <div className="patient-actions">
-            <button className="btn-primary" onClick={() => navigate(`/patient/${patient.firebaseId}`)}>View Profile</button>
-                <button className="btn-secondary">Test Results</button>
+            <button onClick={() => navigate(`/patient/${patient.firebaseId}`)}>View Profile</button>
               </div>
             </div>
           ))}

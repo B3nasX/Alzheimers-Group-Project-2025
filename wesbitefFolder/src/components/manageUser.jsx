@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./manageUser.css";
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  doc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db, auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Navbar from "./NavBar";
@@ -89,12 +82,11 @@ const ManageUsers = ({ user, onLogout }) => {
         <h2>Manage Users</h2>
 
       <button
-        className="toggle-add-user-btn"
+        className="add-button"
         onClick={() => setShowAddUserForm((prev) => !prev)}
       >
         {showAddUserForm ? "Cancel" : "Add User"}
       </button>
-
       {showAddUserForm && (
         <div className="add-user-form">
           <input
@@ -141,7 +133,7 @@ const ManageUsers = ({ user, onLogout }) => {
             <option value="admin">Admin</option>
           </select>
 
-          <button className="save-user-btn" onClick={handleAddUser}>
+          <button className="save-button" onClick={handleAddUser}>
             Save
           </button>
         </div>
@@ -164,7 +156,7 @@ const ManageUsers = ({ user, onLogout }) => {
               <tr key={u.firebaseId}>
                 <td>{u.firebaseId}</td>
                 <td>
-                  {u.firstName} {u.lastName}
+                  {u.first_name} {u.last_name}
                 </td>
                 <td>{u.email}</td>
                 <td className="role-cell">{u.role}</td>

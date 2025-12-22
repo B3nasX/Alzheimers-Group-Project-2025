@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './NavBar.css';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./NavBar.css";
+import logo from "../assets/beaslogo.png";
 
 const Navbar = ({ user, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,31 +14,28 @@ const Navbar = ({ user, onLogout }) => {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <h2>Medical Portal</h2>
+        <img src={logo} alt="Bea's Clinic Logo" className="nav-logo" />
+        <h2>Bea's Clinic</h2>
+        <img src={logo} alt="Bea's Clinic Logo" className="nav-logo" />
       </div>
 
-      <div className={`nav-links ${isMenuOpen ? 'nav-links-active' : ''}`}>
+      <div className={`nav-links ${isMenuOpen ? "nav-links-active" : ""}`}>
         <Link 
           to="/dashboard" 
-          className={location.pathname === '/dashboard' ? 'active' : ''}
+          className={location.pathname === "/dashboard" ? "active" : ""}
         >
           Dashboard
         </Link>
         <Link 
           to="/patients" 
-          className={location.pathname === '/patients' ? 'active' : ''}
+          className={location.pathname === "/patients" ? "active" : ""}
         >
           Patients
         </Link>
-        <Link 
-          to="/test-results" 
-          className={location.pathname === '/test-results' ? 'active' : ''}
-        >
-          Test Results
-        </Link>
+  
         <Link 
           to="/settings" 
-          className={location.pathname === '/settings' ? 'active' : ''}
+          className={location.pathname === "/settings" ? "active" : ""}
         >
           Settings
         </Link>
@@ -50,7 +48,7 @@ const Navbar = ({ user, onLogout }) => {
         </button>
       </div>
 
-      <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <span></span>
         <span></span>
         <span></span>
