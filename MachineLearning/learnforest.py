@@ -7,16 +7,20 @@ from sklearn.metrics import accuracy_score, classification_report
 df = pd.read_csv('dementia_patients_health_data.csv')
 
 # Remove the data leakage
-df_fixed = df.drop('Cognitive_Test_Scores', axis=1)
+df_fixed = df.copy()
+# df_fixed = df.drop('Cognitive_Test_Scores', axis=1)
+
 
 # Also remove prescription/dosage (they're treatments, not predictors)
-df_fixed = df_fixed.drop(['Prescription', 'Dosage in mg'], axis=1)
+df_fixed = df_fixed.drop(['Prescription', 'Dosage in mg','Dominant_Hand','Diabetic'], axis=1)
 
 # Handle categorical variables
-categorical_cols = ['Education_Level', 'Dominant_Hand', 'Gender', 'Family_History',
+categorical_cols = ['Education_Level','Gender', 'Family_History',
                    'Smoking_Status', 'APOE_ε4', 'Physical_Activity', 'Depression_Status',
                    'Medication_History', 'Nutrition_Diet', 'Sleep_Quality', 
                    'Chronic_Health_Conditions']
+# Value for number of trees in the forest
+trees = 2
 
 for col in categorical_cols:
     df_fixed[col] = pd.factorize(df_fixed[col])[0]
@@ -37,7 +41,7 @@ print(f"Test samples: {len(X_test)}")
 print(f"Dementia rate - Train: {(y_train.sum()/len(y_train))*100:.1f}%, Test: {(y_test.sum()/len(y_test))*100:.1f}%")
 
 # Train model
-model = RandomForestClassifier(n_estimators=100, random_state=42)
+model = RandomForestClassifier(n_estimators=trees, random_state=42)
 model.fit(X_train, y_train)
 
 # Evaluate
@@ -45,6 +49,7 @@ train_acc = model.score(X_train, y_train)
 test_acc = model.score(X_test, y_test)
 
 print(f"\n=== REALISTIC RESULTS ===")
+print(f"\nNo of trees in forest: {trees}")
 print(f"Training accuracy: {train_acc:.1%}")
 print(f"Test accuracy: {test_acc:.1%}")
 
@@ -55,7 +60,7 @@ feature_importance = pd.DataFrame({
 }).sort_values('importance', ascending=False)
 
 print("\nTop features by importance:")
-print(feature_importance.head(10))
+print(feature_importance)
 
 
 

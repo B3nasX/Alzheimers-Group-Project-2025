@@ -12,7 +12,7 @@
   color: #2c3e50;
 }
 
-.toggle-add-user-btn {
+.toggle-add-button {
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   border: none;
@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 
-.toggle-add-user-btn:hover {
+.toggle-add-button:hover {
   background: #0056b3;
 }
 
@@ -44,7 +44,7 @@
   font-size: 0.95rem;
 }
 
-.save-user-btn {
+.save-button {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
@@ -53,11 +53,10 @@
   cursor: pointer;
 }
 
-.save-user-btn:hover {
+.save-button:hover {
   background: #218838;
 }
 
-/* Users table */
 
 .user-table-container {
   margin-top: 0.5rem;

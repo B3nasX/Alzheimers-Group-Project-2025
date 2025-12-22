@@ -47,7 +47,7 @@
   color: #666;
 }
 
-.btn-primary {
+.open-button {
   background: #007bff;
   border: none;
   padding: 0.6rem 1.1rem;
@@ -56,11 +56,11 @@
   cursor: pointer;
 }
 
-.btn-primary:hover {
+.open-button:hover {
   background: #005dc1;
 }
 
-.btn-secondary {
+.close-button {
   background: #e0e0e0;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -68,7 +68,7 @@
   cursor: pointer;
 }
 
-.btn-secondary:hover {
+.close-button {
   background: #c8c8c8;
 }
 
@@ -94,7 +94,7 @@
   color: #2c3e50;
 }
 
-.close-btn {
+.close-button {
   background: #dc3545;
   color: white;
   border: none;
@@ -104,8 +104,5 @@
   font-size: 0.85rem;
 }
 
-.close-btn:hover {
-  background: #b71f33;
-}
 
 

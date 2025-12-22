@@ -5,6 +5,13 @@
   align-items: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
+.login-logo {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+  object-fit: contain;
+}
 
 .login-form {
   background: white;

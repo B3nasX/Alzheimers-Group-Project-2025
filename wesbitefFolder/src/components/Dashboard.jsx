@@ -6,26 +6,28 @@ import { db } from "../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 
 const Dashboard = ({ user, onLogout }) => {
-  const [news, setNews] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadNews = async () => {
+    const fetchProfessionalNews = async () => {
       try {
-        const newsDoc = doc(db, "news_web", "news");
-        const newsSnap = await getDoc(newsDoc);
-
-        if (newsSnap.exists()) {
-          const newsData = newsSnap.data();
-          setNews(Array.isArray(newsData.news) ? newsData.news : []);
-        } else {
-          console.log("No news data found");
+        const response = await fetch("http://164.92.157.146:8000/professional-dementia-news");
+        if (!response.ok) {
+          throw new Error("Failed to fetch news");
         }
-      } catch (error) {
-        console.error("Error loading news: ", error);
+        const data = await response.json();
+        setArticles(data.articles || []);
+      } catch (err) {
+        console.error("Error fetching professional news:", err);
+        setError("Unable to load latest clinical updates at this time.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    loadNews();
+    fetchProfessionalNews();
   }, []);
 
   return (
@@ -46,10 +48,6 @@ const Dashboard = ({ user, onLogout }) => {
             <p>View and manage patient information</p>
           </Link>
 
-          <Link to="/test-results" className="dashboard-card">
-            <h3>Quiz Results</h3>
-            <p>View patients Quiz results</p>
-          </Link>
 
           {user.role === "admin" && (
             <Link to="/manage-users" className="dashboard-card">
@@ -59,18 +57,74 @@ const Dashboard = ({ user, onLogout }) => {
           )}
         </div>
 
-        <div className="recent-news">
-          <h2>Recent News</h2>
-          <div className="news-list">
-            {news.length === 0 && <p>No news available.</p>}
-            <ul>
-            {news.map((item, index) => (
-              <div key={index} className="news-item">
-              <li>{item}</li>
-              </div>     
-            ))}
-            </ul>
-          </div>
+        {/* Professional Dementia News Section */}
+        <div className="recent-news" style={{ marginTop: "40px" }}>
+          <h2 style={{ fontSize: "26px", color: "#004d99", marginBottom: "16px" }}>
+            Latest Research & Clinical Updates in Dementia/Alzheimer's
+          </h2>
+          <p style={{ color: "#555", marginBottom: "24px", fontSize: "15px" }}>
+            Curated for doctors, nurses, and healthcare professionals from peer-reviewed sources.
+          </p>
+
+          {loading && <p>Loading latest updates...</p>}
+
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
+          {!loading && !error && articles.length === 0 && (
+            <p>No recent clinical updates available.</p>
+          )}
+
+          {!loading && !error && articles.length > 0 && (
+            <div className="news-list">
+              <ul style={{ listStyle: "none", padding: 0 }}>
+                {articles.map((art, index) => (
+                  <li
+                    key={index}
+                    style={{
+                      marginBottom: "24px",
+                      paddingBottom: "20px",
+                      borderBottom:
+                        index < articles.length - 1 ? "1px solid #eee" : "none",
+                    }}
+                  >
+                    <a
+                      href={art.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: "19px",
+                        fontWeight: "bold",
+                        color: "#004d99",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {art.title}
+                    </a>
+                    {art.source && (
+                      <span style={{ fontSize: "14px", color: "#777", marginLeft: "10px" }}>
+                        ({art.source})
+                      </span>
+                    )}
+                    <p
+                      style={{
+                        fontSize: "15px",
+                        color: "#333",
+                        margin: "10px 0",
+                        lineHeight: "1.5",
+                      }}
+                    >
+                      {art.summary}
+                    </p>
+                    <small style={{ color: "#999" }}>{art.published}</small>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <p style={{ fontSize: "13px", color: "#999", marginTop: "32px" }}>
+            Sources: ScienceDaily, Nature, NEJM Journal Watch, Alzforum, and other professional research outlets.
+          </p>
         </div>
       </div>
     </div>

@@ -49,25 +49,6 @@
   margin: 0;
   font-size: 1.25rem;
 }
-
-.quiz-status {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.quiz-status.completed {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.quiz-status.pending {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
 .patient-info {
   margin-bottom: 1.5rem;
 }
@@ -102,72 +83,3 @@
   flex-wrap: wrap;
 }
 
-.btn-primary {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-  flex: 1;
-}
-
-.btn-primary:hover {
-  background: #0056b3;
-}
-
-.btn-secondary {
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-  flex: 1;
-}
-
-.btn-secondary:hover {
-  background: #545b62;
-}
-
-.btn-quiz {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-  flex: 1;
-  margin-top: 0.5rem;
-}
-
-.btn-quiz:hover {
-  background: #218838;
-}
-@media (max-width: 768px) {
-  .patients-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .patient-header {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .patient-actions {
-    flex-direction: column;
-  }
-  
-  .btn-primary,
-  .btn-secondary,
-  .btn-quiz {
-    flex: none;
-    width: 100%;
-  }
-}
