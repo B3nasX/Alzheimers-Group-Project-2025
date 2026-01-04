@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
 import logo from "../assets/beaslogo.png";
 
+
 const Login = ({ onLogin }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -98,17 +99,17 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Bea's Clinic</h2>
+        <h2>Welcome to Bea's Clinic Website!</h2>
         <img src={logo} alt="Bea's Clinic Logo" className="login-logo" />
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>User ID or Email:</label>
+            <label>Email:</label>
             <input
               type="text"
               name="id"
               value={id}
               onChange={handleIdChange}
-              placeholder="Enter your UID or Email"
+              placeholder="Enter your Email"
               required         
             />
           </div>
