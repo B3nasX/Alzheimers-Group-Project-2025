@@ -42,31 +42,31 @@ function App() {
             <Route 
               path="/dashboard" 
               element={
-                user ? <Dashboard user={user} /> : <Navigate to="/login" />
+                user ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
               } 
             />
             <Route 
               path="/patients" 
               element={
-                user ? <PatientProfiles user={user} /> : <Navigate to="/login" />
+                user ? <PatientProfiles user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
               } 
             />
             <Route 
               path="/settings" 
               element={
-                user ? <Settings user={user} /> : <Navigate to="/login" />
+                user ? <Settings user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
               } 
             />
             <Route 
               path="/manage-users" 
               element={
-                user ? <ManageUsers user={user} /> : <Navigate to="/login" />
+                user ? <ManageUsers user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
               } 
             />
             <Route 
               path="/patient/:id" 
               element={
-                user ? <PatientProfile user={user} /> : <Navigate to="/login" />
+                user ? <PatientProfile user={user} onLogout={handleLogout} /> : <Navigate to="/login" />
               } 
             />
             <Route path="/" element={<Navigate to="/login" />} />
