@@ -74,13 +74,4 @@
   background-color: #0056b3;
 }
 
-@media (max-width: 480px) {
-  .login-form {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
 
-  .login-container {
-    padding: 1rem;
-  }
-}

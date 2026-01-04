@@ -48,11 +48,7 @@ const Navbar = ({ user, onLogout }) => {
         </button>
       </div>
 
-      <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      
     </nav>
   );
 };
