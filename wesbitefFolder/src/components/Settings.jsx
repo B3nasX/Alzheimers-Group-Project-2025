@@ -4,9 +4,9 @@ import Navbar from "./NavBar";
 import "./Settings.css";
 import { auth, db } from "../firebase/config";
 import { 
-  updatePassword, 
-  updateEmail, 
-  reauthenticateWithCredential, 
+  updatePassword,
+  updateEmail,
+  reauthenticateWithCredential,
   EmailAuthProvider,
   sendEmailVerification
 } from "firebase/auth";
@@ -15,7 +15,6 @@ import { doc, updateDoc } from "firebase/firestore";
 const Settings = ({ user, onLogout }) => {
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
@@ -23,16 +22,6 @@ const Settings = ({ user, onLogout }) => {
   const navigate = useNavigate();
 
   const isAdmin = user?.role === "admin";
-
-  const reauthenticate = async (password) => {
-    try {
-      const credential = EmailAuthProvider.credential(auth.currentUser.email, password);
-      await reauthenticateWithCredential(auth.currentUser, credential);
-      return true;
-    } catch (error) {
-      throw error;
-    }
-  };
 
   const handleChangePassword = async () => {
     if (!newPassword.trim()) {
@@ -45,34 +34,23 @@ const Settings = ({ user, onLogout }) => {
       return;
     }
 
-    if (!currentPassword) {
-      alert("Please enter your current password to change password");
-      return;
-    }
-
     if (newPassword.length < 6) {
       alert("Password must be at least 6 characters long");
       return;
     }
 
     try {
-      // Re-authenticate user
-      await reauthenticate(currentPassword);
-
       // Update password in Firebase Authentication
       await updatePassword(auth.currentUser, newPassword);
 
       alert("Password updated successfully!");
       setNewPassword("");
       setConfirmPassword("");
-      setCurrentPassword("");
 
     } catch (error) {
       console.error("Error changing password:", error);
       
-      if (error.code === "auth/wrong-password") {
-        alert("Incorrect current password.");
-      } else if (error.code === "auth/weak-password") {
+      if (error.code === "auth/weak-password") {
         alert("Password is too weak. Use at least 6 characters.");
       } else if (error.code === "auth/requires-recent-login") {
         alert("Session expired. Please log out and log in again before changing password.");
@@ -102,7 +80,6 @@ const Settings = ({ user, onLogout }) => {
 
   const closeEditProfile = () => {
     setIsEditProfileOpen(false);
-    setCurrentPassword("");
     setNewEmail("");
     setNewPassword("");
     setConfirmPassword("");
@@ -143,20 +120,9 @@ const Settings = ({ user, onLogout }) => {
                   </button>
                 </div>
                 
-                  <label htmlFor="currentPassword">
-                    Current Password (required for changes):
-                  </label>
-                  <input
-                    type="password"
-                    id="currentPassword"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    placeholder="Enter current password"
-                  />
-                
-
                 <h3>Change Password</h3>
                 
+                <div className="form-group">
                   <label htmlFor="newPassword">
                     New Password (min 6 characters):
                   </label>
@@ -181,11 +147,11 @@ const Settings = ({ user, onLogout }) => {
                   
                   <button 
                     onClick={handleChangePassword}
-                    
+                    className="change-password-btn"
                   >
                     Change Password
                   </button>
-                
+                </div>
               </div>
             )}
           </div>
@@ -202,7 +168,6 @@ const Settings = ({ user, onLogout }) => {
               <button
                 className="close-button"
                 onClick={() => setIsCustomizeOpen(false)}
-                
               >
                 Close
               </button>

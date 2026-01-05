@@ -244,7 +244,7 @@ const PatientProfile = ({ user, onLogout }) => {
       assessment.max_score || 100
     );
     
-    // Determine trend color
+    // Determine  color
     const getTrendColor = () => {
       if (scores.length < 2) return "#3498db";
       const firstScore = scores[0];

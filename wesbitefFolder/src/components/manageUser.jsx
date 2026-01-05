@@ -9,8 +9,8 @@ const ManageUsers = ({ user, onLogout }) => {
   const [users, setUsers] = useState([]);
   const [showAddUserForm, setShowAddUserForm] = useState(false);
   const [newUser, setNewUser] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     role: "doctor",
@@ -41,18 +41,18 @@ const ManageUsers = ({ user, onLogout }) => {
 
       await setDoc(doc(db, "gp", uid), {
         UID: uid,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
         email: newUser.email,
         role: newUser.role,
-        createdAt: serverTimestamp(),
+        gp_ID: findHighestGPID(),     
       });
 
       alert("User added successfully.");
       setShowAddUserForm(false);
       setNewUser({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         role: "doctor",
@@ -74,6 +74,19 @@ const ManageUsers = ({ user, onLogout }) => {
       alert("Failed to delete user. Please try again.");
     }
   };
+  const findHighestGPID = () => {
+    let highestID = 0;
+    let gp_id = "";
+    users.forEach((u) => {
+      const gpIDNum = parseInt(u.gp_ID, 10);
+      if (gpIDNum > highestID) {
+        highestID = gpIDNum;
+        gp_id = highestID + 1;
+      }
+    });
+    return gp_id;
+    
+  }
 
   return (
     <>
@@ -92,17 +105,17 @@ const ManageUsers = ({ user, onLogout }) => {
           <input
             type="text"
             placeholder="First name"
-            value={newUser.firstName}
+            value={newUser.first_name}
             onChange={(e) =>
-              setNewUser({ ...newUser, firstName: e.target.value })
+              setNewUser({ ...newUser, first_name: e.target.value })
             }
           />
           <input
             type="text"
             placeholder="Last name"
-            value={newUser.lastName}
+            value={newUser.last_name}
             onChange={(e) =>
-              setNewUser({ ...newUser, lastName: e.target.value })
+              setNewUser({ ...newUser, last_name: e.target.value })
             }
           />
           <input
